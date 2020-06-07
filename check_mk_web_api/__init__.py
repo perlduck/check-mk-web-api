@@ -164,7 +164,7 @@ class WebApi:
         raise CheckMkWebApiException(result)
 
     def add_host(self, hostname, folder='/', ipaddress=None,
-                 alias=None, tags=None, **custom_attrs):
+                 alias=None, tags=None, nodes=None, **custom_attrs):
         """
         Adds a nonexistent host to the Check_MK inventory
 
@@ -174,6 +174,7 @@ class WebApi:
         ipaddress (str): IP address of host
         alias (str): Alias for host
         tags (dict): Dictionary of tags, prefix tag_ can be omitted
+        nodes (list): List of child nodes in case this is a cluster
         custom_attrs (dict): dict that will get merged with generated attributes, mainly for compatibility reasons
         """
         data = NoNoneValueDict({
@@ -196,6 +197,9 @@ class WebApi:
 
         attributes.update(custom_attrs)
         data['attributes'] = attributes
+
+        if nodes:
+            data['nodes'] = nodes
 
         return self.make_request('add_host', data=data)
 
