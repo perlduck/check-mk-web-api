@@ -714,7 +714,7 @@ class WebApi:
         """
         return self.make_request('get_rulesets_info', query_params={'output_format': 'python'})
 
-    def set_ruleset(self, ruleset, ruleset_config):
+    def set_ruleset(self, ruleset, ruleset_config, configuration_hash=None):
         """
         Edits one rule set
 
@@ -724,7 +724,8 @@ class WebApi:
         """
         data = NoNoneValueDict({
             'ruleset_name': ruleset,
-            'ruleset': ruleset_config if ruleset_config else {}
+            'ruleset': ruleset_config if ruleset_config else {},
+            'configuration_hash': configuration_hash
         })
 
         return self.make_request('set_ruleset', data=data, query_params={'request_format': 'python'})
