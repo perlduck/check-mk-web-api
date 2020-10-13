@@ -203,7 +203,7 @@ class WebApi:
 
         return self.make_request('add_host', data=data)
 
-    def edit_host(self, hostname, unset_attributes=None, **custom_attrs):
+    def edit_host(self, hostname, unset_attributes=None, nodes=None, **custom_attrs):
         """
         Edits the properties of an existing host
 
@@ -211,12 +211,14 @@ class WebApi:
         hostname (str): Name of host to edit
         unset_attributes (list): List of attributes to unset
         custom_attrs (dict): dict that will get merged with generated attributes, mainly for compatibility reasons
+        nodes (list): List of nodes if host is a cluster
         """
         data = NoNoneValueDict(
             {
                 'hostname': hostname,
                 'unset_attributes': unset_attributes,
-                'attributes': custom_attrs
+                'attributes': custom_attrs,
+                'nodes': nodes
             }
         )
 
