@@ -599,7 +599,7 @@ class WebApi:
             'alias': alias,
         })
 
-        return self.make_request('add_hostgroup', data=data)
+        return self.make_request('add_hostgroup', data=data, query_params={'request_format': 'python'})
 
     def edit_hostgroup(self, group, alias):
         """
@@ -614,7 +614,7 @@ class WebApi:
             'alias': alias,
         })
 
-        return self.make_request('edit_hostgroup', data=data)
+        return self.make_request('edit_hostgroup', data=data, query_params={'request_format': 'python'})
 
     def delete_hostgroup(self, group):
         """
@@ -627,7 +627,7 @@ class WebApi:
             'groupname': group,
         })
 
-        return self.make_request('delete_hostgroup', data=data)
+        return self.make_request('delete_hostgroup', data=data, query_params={'request_format': 'python'})
 
     def delete_all_hostgroups(self):
         """
